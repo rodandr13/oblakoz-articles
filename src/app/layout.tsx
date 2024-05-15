@@ -1,10 +1,15 @@
 import React from "react";
 
+import { Box, ThemeProvider } from "@mui/material";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.scss";
+import { Montserrat } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+import "./globals.scss";
+import { Header } from "@/components/header";
+import theme from "@/theme/theme";
+
+const montserrat = Montserrat({ subsets: ["latin", "cyrillic"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,8 +22,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="ru">
+      <body className={montserrat.className}>
+        <ThemeProvider theme={theme}>
+          <AppRouterCacheProvider>
+            <Box>
+              <Header />
+              {children}
+            </Box>
+          </AppRouterCacheProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
