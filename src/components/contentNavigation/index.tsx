@@ -32,7 +32,7 @@ export const ContentNavigation = () => {
     fontWeight: 500,
     whiteSpace: "nowrap",
     display: "block",
-    padding: "8px 8px 8px 34px",
+    padding: "10px 8px 10px 34px",
     borderRadius: "8px",
     position: "relative",
     "&::before": {

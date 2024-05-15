@@ -1,5 +1,4 @@
 import { Box, List, ListItem } from "@mui/material";
-
 import { Rubric } from "@/types";
 
 interface Props {

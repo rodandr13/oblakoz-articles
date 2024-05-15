@@ -8,6 +8,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.scss";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { PageContainer } from "@/components/pageContainer";
 import theme from "@/theme/theme";
 
 const montserrat = Montserrat({ subsets: ["latin", "cyrillic"] });
@@ -27,9 +28,9 @@ export default function RootLayout({
       <body className={montserrat.className}>
         <ThemeProvider theme={theme}>
           <AppRouterCacheProvider>
-            <Box>
+            <Box display="flex" flexDirection="column" minHeight="100vh">
               <Header />
-              {children}
+              <PageContainer sx={{ flexGrow: "1" }}>{children}</PageContainer>
               <Footer />
             </Box>
           </AppRouterCacheProvider>
