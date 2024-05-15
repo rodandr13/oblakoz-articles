@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
 import "./globals.scss";
+import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import theme from "@/theme/theme";
 
@@ -29,6 +30,7 @@ export default function RootLayout({
             <Box>
               <Header />
               {children}
+              <Footer />
             </Box>
           </AppRouterCacheProvider>
         </ThemeProvider>

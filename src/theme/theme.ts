@@ -1,6 +1,9 @@
 "use client";
 
 import { createTheme } from "@mui/material/styles";
+import { Montserrat } from "next/font/google";
+
+const montserrat = Montserrat({ subsets: ["latin", "cyrillic"] });
 
 const theme = createTheme({
   breakpoints: {
@@ -11,6 +14,9 @@ const theme = createTheme({
       lg: 1160,
       xl: 1536,
     },
+  },
+  typography: {
+    fontFamily: `${montserrat.style.fontFamily}, Arial, sans-serif`,
   },
 });
 
