@@ -7,9 +7,14 @@ import { Rubric } from "@/types";
 
 const rubricList = {
   display: "flex",
+  position: "relative",
   margin: "0",
   padding: "8px 0",
   gap: "8px",
+  overflowX: "auto",
+  overscrollBehavior: "auto",
+  scrollSnapType: "x mandatory",
+  scrollbarWidth: "none",
 };
 
 const rubricItem = {
@@ -18,10 +23,11 @@ const rubricItem = {
   borderRadius: "6px",
   padding: "6px 8px",
   whiteSpace: "nowrap",
-  overflow: "hidden",
   fontSize: "0.875rem",
   width: "auto",
   cursor: "pointer",
+  scrollSnapAlign: "start",
+  scrollSnapStop: "always",
   "&:hover": {
     backgroundColor: "rgb(241, 241, 241)",
   },

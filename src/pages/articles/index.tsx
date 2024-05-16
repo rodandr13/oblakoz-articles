@@ -1,15 +1,26 @@
 "use client";
 
-import { Box, Grid, Link as MuiLink, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+
+import {
+  Box,
+  Grid,
+  Link as MuiLink,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
+import { number } from "prop-types";
 
 import { NotFound } from "@/components/notfound";
 import { Pagination } from "@/components/pagination";
 import { Rubrics } from "@/components/rubrics";
 import { Article, PageProps } from "@/types";
+import SvgTimer from "@/components/svgTimer";
 
 interface Props {
   data: PageProps;
@@ -87,12 +98,43 @@ const views = {
   },
 };
 
+const imageContainer = {
+  position: "relative",
+  background: "linear-gradient(272.84deg, #4AA7FF 13.66%, #4F40FF 97.64%)",
+};
+
 export const Articles = ({ data }: Props) => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("lg"));
+  const isExtraSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const { articles } = data;
-  const columns: Article[][] = [[], [], []];
-  articles.forEach((article, index) => {
-    columns[index % 3].push(article);
-  });
+  const [columns, setColumns] = useState<Article[][]>([]);
+  const [columnCount, setColumnCount] = useState(3);
+
+  useEffect(() => {
+    if (isExtraSmallScreen) {
+      setColumnCount(1);
+    } else if (isSmallScreen) {
+      setColumnCount(2);
+    } else {
+      setColumnCount(3);
+    }
+  }, [isSmallScreen, isExtraSmallScreen]);
+
+  useEffect(() => {
+    const getColumns = (articles: Article[], columnCount: number) => {
+      const columns: Article[][] = Array.from(
+        { length: columnCount },
+        () => []
+      );
+      articles.forEach((article, index) => {
+        columns[index % columnCount].push(article);
+      });
+      return columns;
+    };
+
+    setColumns(getColumns(articles, columnCount));
+  }, [articles, columnCount]);
 
   return (
     <Box>
@@ -116,18 +158,20 @@ export const Articles = ({ data }: Props) => {
                     component={Link}
                     sx={articleLink}
                   >
-                    <Image
-                      src={`${baseUrl}${article.coverSrc}`}
-                      alt={article.title}
-                      width={600}
-                      height={316}
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        margin: "0",
-                        display: "block",
-                      }}
-                    />
+                    <Box sx={imageContainer}>
+                      <Image
+                        src={`${baseUrl}${article.coverSrc}`}
+                        alt={article.title}
+                        width={600}
+                        height={316}
+                        style={{
+                          width: "100%",
+                          height: "auto",
+                          margin: "0",
+                          display: "block",
+                        }}
+                      />
+                    </Box>
                     <Box sx={textContainer}>
                       <Box sx={details}>
                         <Typography sx={articleDate}>

@@ -16,11 +16,10 @@ export const ContentNavigation = () => {
     gap: "16px",
     margin: "0",
     padding: "0",
-    "& > li": {
-      width: "auto",
-      margin: "0",
-      padding: "0",
-    },
+    overflowX: "auto",
+    overscrollBehavior: "auto",
+    scrollSnapType: "x mandatory",
+    scrollbarWidth: "none",
   };
 
   const navLink = {
@@ -58,6 +57,14 @@ export const ContentNavigation = () => {
     opacity: "1",
   };
 
+  const navItem = {
+    scrollSnapAlign: "start",
+    scrollSnapStop: "always",
+    width: "auto",
+    margin: "0",
+    padding: "0",
+  };
+
   const links = [
     { href: "/all", label: "Всё", icon: "/images/all.svg" },
     { href: "/news", label: "Новости", icon: "/images/news.svg" },
@@ -78,7 +85,7 @@ export const ContentNavigation = () => {
     <Box component="nav" sx={nav}>
       <List sx={navList}>
         {links.map((link) => (
-          <ListItem key={link.href}>
+          <ListItem key={link.href} sx={navItem}>
             <MuiLink
               href={link.href}
               component={Link}
