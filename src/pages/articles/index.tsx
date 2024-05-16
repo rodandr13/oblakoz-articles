@@ -1,9 +1,13 @@
+"use client";
+
 import { Box, Grid, Link as MuiLink, Typography } from "@mui/material";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
 
+import { NotFound } from "@/components/notfound";
+import { Pagination } from "@/components/pagination";
 import { Rubrics } from "@/components/rubrics";
 import { Article, PageProps } from "@/types";
 
@@ -25,6 +29,9 @@ const articleLink = {
   display: "block",
   margin: 0,
   padding: 0,
+  "&:hover": {
+    boxShadow: "rgba(107, 117, 159, 0.3) 2px 2px 8px",
+  },
 };
 
 const articleTitle = {
@@ -86,52 +93,62 @@ export const Articles = ({ data }: Props) => {
   articles.forEach((article, index) => {
     columns[index % 3].push(article);
   });
+
   return (
     <Box>
-      <Rubrics rubrics={data.rubrics} />
+      <Rubrics rubrics={data.rubrics} activeRubrics={data.activeRubrics} />
       <Grid container spacing={3} sx={articlesStyles}>
-        {columns.map((column, columnIndex) => (
-          <Grid
-            item
-            xs={4}
-            key={columnIndex}
-            columnGap="24px"
-            rowGap="24px"
-            display="flex"
-            flexDirection="column"
-          >
-            {column.map((article) => (
-              <Box key={article.id}>
-                <MuiLink href={article.href} component={Link} sx={articleLink}>
-                  <Image
-                    src={`${baseUrl}${article.coverSrc}`}
-                    alt={article.title}
-                    width={600}
-                    height={316}
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      margin: "0",
-                      display: "block",
-                    }}
-                  />
-                  <Box sx={textContainer}>
-                    <Box sx={details}>
-                      <Typography sx={articleDate}>
-                        Статьи • {formatDate(article.date)}
-                      </Typography>
-                      <Typography sx={views}>{article.views}</Typography>
+        {articles.length > 0 ? (
+          columns.map((column, columnIndex) => (
+            <Grid
+              item
+              xs={4}
+              key={columnIndex}
+              columnGap="24px"
+              rowGap="24px"
+              display="flex"
+              flexDirection="column"
+            >
+              {column.map((article) => (
+                <Box key={article.id}>
+                  <MuiLink
+                    href={article.href}
+                    component={Link}
+                    sx={articleLink}
+                  >
+                    <Image
+                      src={`${baseUrl}${article.coverSrc}`}
+                      alt={article.title}
+                      width={600}
+                      height={316}
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        margin: "0",
+                        display: "block",
+                      }}
+                    />
+                    <Box sx={textContainer}>
+                      <Box sx={details}>
+                        <Typography sx={articleDate}>
+                          Статьи • {formatDate(article.date)}
+                        </Typography>
+                        <Typography sx={views}>{article.views}</Typography>
+                      </Box>
+                      <Box component="h3" sx={articleTitle}>
+                        {article.title}
+                      </Box>
                     </Box>
-                    <Box component="h3" sx={articleTitle}>
-                      {article.title}
-                    </Box>
-                  </Box>
-                </MuiLink>
-              </Box>
-            ))}
-          </Grid>
-        ))}
+                  </MuiLink>
+                </Box>
+              ))}
+            </Grid>
+          ))
+        ) : (
+          <NotFound />
+        )}
       </Grid>
+      <Pagination totalPages={data.totalPages} activePage={data.activePage} />
     </Box>
   );
 };

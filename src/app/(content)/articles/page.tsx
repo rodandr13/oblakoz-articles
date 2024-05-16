@@ -1,8 +1,15 @@
 import { Articles } from "@/pages/articles";
 import { ServerResponse } from "@/types";
 
-async function getData(): Promise<ServerResponse> {
-  const res = await fetch("http://localhost:3000/articles.json");
+async function getData(searchParams: {
+  [key: string]: string | string[] | undefined;
+}): Promise<ServerResponse> {
+  const params = new URLSearchParams(
+    searchParams as Record<string, string>
+  ).toString();
+  const url = `https://oblakoz.ru/_next/data/esjhMY5ByOOl77eVcZQmS/articles.json?${params}`;
+
+  const res = await fetch(url);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -10,12 +17,14 @@ async function getData(): Promise<ServerResponse> {
   return res.json();
 }
 
-export async function generateMetadata() {
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const {
-    props: {
-      pageProps: { metaData },
-    },
-  } = await getData();
+    pageProps: { metaData },
+  } = await getData(searchParams);
 
   return {
     title: metaData.title,
@@ -24,10 +33,12 @@ export async function generateMetadata() {
   };
 }
 
-export default async function Page() {
-  const {
-    props: { pageProps },
-  } = await getData();
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const { pageProps } = await getData(searchParams);
   return (
     <main>
       <Articles data={pageProps} />

@@ -1,9 +1,9 @@
-import { Box, List, ListItem } from "@mui/material";
-import { Rubric } from "@/types";
+"use client";
 
-interface Props {
-  rubrics: Rubric[];
-}
+import { Box, List, ListItem } from "@mui/material";
+import { useRouter, useSearchParams } from "next/navigation";
+
+import { Rubric } from "@/types";
 
 const rubricList = {
   display: "flex",
@@ -27,12 +27,48 @@ const rubricItem = {
   },
 };
 
-export const Rubrics = ({ rubrics }: Props) => {
+const activeRubricItem = {
+  boxShadow: "2px 2px 8px rgba(107, 117, 159, 0.3)",
+};
+
+interface Props {
+  rubrics: Rubric[];
+  activeRubrics: string[];
+}
+
+export const Rubrics = ({ rubrics, activeRubrics }: Props) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const selectedPage = searchParams?.get("page");
+
+  const handleClick = (id: string) => {
+    const updateActiveRubric = activeRubrics.includes(id)
+      ? activeRubrics.filter((item) => item !== id)
+      : [...activeRubrics, id];
+    const joinedActiveRubrics = updateActiveRubric.join("__");
+
+    const params = new URLSearchParams();
+    if (selectedPage) {
+      params.append("page", selectedPage);
+      params.append("rubrics", joinedActiveRubrics);
+    } else {
+      params.append("rubrics", joinedActiveRubrics);
+    }
+    router.push(`?${params.toString()}`);
+  };
+
   return (
     <Box>
       <List sx={rubricList}>
         {rubrics.map((rubric) => (
-          <ListItem sx={rubricItem} key={rubric.id}>
+          <ListItem
+            onClick={() => handleClick(rubric.id)}
+            sx={{
+              ...rubricItem,
+              ...(activeRubrics.includes(rubric.id) && activeRubricItem),
+            }}
+            key={rubric.id}
+          >
             {rubric.title}
           </ListItem>
         ))}

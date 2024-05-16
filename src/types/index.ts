@@ -29,7 +29,5 @@ export type PageProps = {
 };
 
 export type ServerResponse = {
-  props: {
-    pageProps: PageProps;
-  };
+  pageProps: PageProps;
 };
