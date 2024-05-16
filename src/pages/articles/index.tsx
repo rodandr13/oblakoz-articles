@@ -14,13 +14,11 @@ import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
-import { number } from "prop-types";
 
 import { NotFound } from "@/components/notfound";
 import { Pagination } from "@/components/pagination";
 import { Rubrics } from "@/components/rubrics";
 import { Article, PageProps } from "@/types";
-import SvgTimer from "@/components/svgTimer";
 
 interface Props {
   data: PageProps;
