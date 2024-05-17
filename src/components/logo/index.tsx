@@ -12,6 +12,12 @@ export const Logo = () => {
     margin: "0",
     font: "inherit",
     textDecoration: "none",
+    position: "relative",
+    width: { xs: "125px", lg: "167px" },
+    height: { xs: "40px", lg: "80px" },
+    "& > img": {
+      objectFit: "cover",
+    },
   };
 
   return (
@@ -20,10 +26,8 @@ export const Logo = () => {
         <Image
           alt="Логотип"
           src="/images/logo_with_title.svg"
-          width="167"
-          height="80"
-          loading="lazy"
-          decoding="async"
+          loading="eager"
+          fill
         />
       </MuiLink>
     </Box>

@@ -9,7 +9,7 @@ const rubricList = {
   display: "flex",
   position: "relative",
   margin: "0",
-  padding: "8px 0",
+  padding: "4px 0 8px 0",
   gap: "8px",
   overflowX: "auto",
   overscrollBehavior: "auto",

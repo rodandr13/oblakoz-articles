@@ -22,9 +22,15 @@ const boxStyles = {
   justifyContent: "space-between",
 };
 
+const header = {
+  height: { xs: "50px", lg: "80px" },
+  display: "flex",
+  alignItems: "center",
+};
+
 export const Header = () => {
   return (
-    <Box component="header">
+    <Box component="header" sx={header}>
       <Container maxWidth="lg" sx={containerStyles}>
         <Box component="nav" sx={boxStyles}>
           <Logo />

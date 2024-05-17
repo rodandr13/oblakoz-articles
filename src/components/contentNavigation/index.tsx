@@ -8,7 +8,7 @@ export const ContentNavigation = () => {
   const pathname = usePathname();
 
   const nav = {
-    padding: "24px 0 8px 0",
+    padding: "16px 0 0 0",
   };
 
   const navList = {
@@ -40,7 +40,7 @@ export const ContentNavigation = () => {
       width: "24px",
       height: "24px",
       position: "absolute",
-      left: "8px",
+      left: "6px",
       top: "50%",
       transform: "translateY(-50%)",
       backgroundSize: "contain",

@@ -1,6 +1,4 @@
-import { Suspense } from "react";
-
-import { Box, CircularProgress } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { GridCards } from "@/components/gridCards";
 import { Pagination } from "@/components/pagination";
@@ -13,7 +11,7 @@ interface Props {
 
 export const Articles = ({ data }: Props) => {
   return (
-    <Box>
+    <Box component="main">
       <Rubrics rubrics={data.rubrics} activeRubrics={data.activeRubrics} />
       <GridCards articles={data.articles} />
       <Pagination totalPages={data.totalPages} activePage={data.activePage} />

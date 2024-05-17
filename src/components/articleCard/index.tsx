@@ -35,7 +35,7 @@ const textContainer = {
   backgroundColor: "#fff",
   display: "flex",
   flexDirection: "column",
-  gap: "12px",
+  gap: "8px",
 };
 
 const details = {
@@ -86,7 +86,7 @@ const articleTitle = {
 
 export const ArticleCard = ({ article }: Props) => {
   return (
-    <Box key={article.id}>
+    <Box key={article.id} component="article">
       <MuiLink
         href={`/articles/${article.href}`}
         component={Link}
@@ -113,7 +113,7 @@ export const ArticleCard = ({ article }: Props) => {
             </Typography>
             <Typography sx={views}>{article.views}</Typography>
           </Box>
-          <Box component="h3" sx={articleTitle}>
+          <Box component="h2" sx={articleTitle}>
             {article.title}
           </Box>
         </Box>

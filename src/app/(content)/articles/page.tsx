@@ -23,9 +23,5 @@ export default async function Page({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const { pageProps } = await getData(searchParams);
-  return (
-    <main>
-      <Articles data={pageProps} />
-    </main>
-  );
+  return <Articles data={pageProps} />;
 }

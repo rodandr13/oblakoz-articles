@@ -8,29 +8,23 @@ html {
 }
 
 strong,b {
-  font-weight: 700;
+  font-weight: 500;
 }
 
 body {
   margin: 0;
-  color: #38414D;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.125;
-  font-family: Montserrat,Arial,sans-serif;
   background-color: #F5F5F7;
   min-width: 320px;
   overflow-x: hidden;
+
   &::before {
     content: " ";
     display: block;
     position: absolute;
     width: 100%;
     height: 100%;
-    background: url(/images/gradient_1.svg) top -250px left calc(50% + 320px) no-repeat,url(/images/gradient_2.svg) top 11px left calc(50% + 160px) no-repeat,url(/images/gradient_1.svg) top 400px left calc(50% - 650px) no-repeat,url(/images/gradient_1.svg) top 750px left calc(50% + 600px) no-repeat;
-    -webkit-background-size: 430px 430px,200px 200px,350px 350px,350px 350px;
+    background: url("/images/gradient_1.svg") top -250px left calc(50% + 320px) no-repeat,url("/images/gradient_2.svg") top 11px left calc(50% + 160px) no-repeat,url("/images/gradient_1.svg") top 400px left calc(50% - 650px) no-repeat,url("/images/gradient_1.svg") top 750px left calc(50% + 600px) no-repeat;
     background-size: 430px 430px,200px 200px,350px 350px,350px 350px;
-    -webkit-filter: blur(90px);
     filter: blur(90px);
     z-index: -1;
   }
@@ -45,6 +39,7 @@ body {
 body::backdrop {
   background-color: #F8F8F8;
 }
+
 a {
   text-decoration: none;
 }

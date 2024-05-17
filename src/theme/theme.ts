@@ -16,7 +16,11 @@ const theme = createTheme({
     },
   },
   typography: {
+    fontSize: 16,
     fontFamily: `${montserrat.style.fontFamily}, Arial, sans-serif`,
+    body1: {
+      fontSize: "1rem",
+    },
   },
 });
 

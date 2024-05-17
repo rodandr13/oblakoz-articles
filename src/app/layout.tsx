@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, ThemeProvider } from "@mui/material";
+import { Box, Container, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
@@ -9,7 +9,6 @@ import "./globals.scss";
 
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import { PageContainer } from "@/components/pageContainer";
 import theme from "@/theme/theme";
 
 const montserrat = Montserrat({ subsets: ["latin", "cyrillic"] });
@@ -31,7 +30,7 @@ export default function RootLayout({
           <AppRouterCacheProvider>
             <Box display="flex" flexDirection="column" minHeight="100vh">
               <Header />
-              <PageContainer sx={{ flexGrow: "1" }}>{children}</PageContainer>
+              <Container sx={{ flexGrow: "1" }}>{children}</Container>
               <Footer />
             </Box>
           </AppRouterCacheProvider>

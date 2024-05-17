@@ -24,7 +24,13 @@ export const GridCards = ({ articles }: Props) => {
   const columns = getColumns(articles, columnsCount);
 
   return (
-    <Grid container spacing={3} sx={articlesStyles}>
+    <Grid
+      container
+      spacing={3}
+      sx={articlesStyles}
+      component="section"
+      aria-label="Статьи"
+    >
       {articles.length > 0 ? (
         columns.map((column, columnIndex) => (
           <Grid

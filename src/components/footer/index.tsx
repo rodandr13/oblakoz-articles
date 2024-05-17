@@ -1,5 +1,6 @@
 import {
   Box,
+  Container,
   Grid,
   Link as MuiLink,
   List,
@@ -8,8 +9,6 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-
-import { PageContainer } from "@/components/pageContainer";
 
 const footerStyles = {
   backgroundColor: "#242D36",
@@ -62,7 +61,7 @@ const social = {
 const listStyles = {
   display: "flex",
   flexWrap: "wrap",
-  gap: { xs: "16px", lg: "16px 0" },
+  gap: { xs: "16px", lg: "8px 0" },
   margin: 0,
   padding: 0,
   justifyContent: { xs: "flex-start", lg: "space-between" },
@@ -144,7 +143,7 @@ const footerContainer = {
 export const Footer = () => {
   return (
     <Box component="footer" sx={footerStyles}>
-      <PageContainer>
+      <Container>
         <Grid container sx={footerContainer}>
           <Grid item xs={3}>
             <Image
@@ -265,7 +264,7 @@ export const Footer = () => {
             </ListItem>
           </List>
         </Box>
-      </PageContainer>
+      </Container>
     </Box>
   );
 };
