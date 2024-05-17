@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, List, ListItem } from "@mui/material";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Rubric } from "@/types";
 
@@ -45,7 +45,12 @@ interface Props {
 export const Rubrics = ({ rubrics, activeRubrics }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  let pathname = usePathname();
   const selectedPage = searchParams?.get("page");
+
+  if (!pathname) {
+    pathname = "/";
+  }
 
   const handleClick = (id: string) => {
     const updateActiveRubric = activeRubrics.includes(id)
@@ -54,13 +59,19 @@ export const Rubrics = ({ rubrics, activeRubrics }: Props) => {
     const joinedActiveRubrics = updateActiveRubric.join("__");
 
     const params = new URLSearchParams();
+
     if (selectedPage) {
-      params.append("page", selectedPage);
-      params.append("rubrics", joinedActiveRubrics);
-    } else {
-      params.append("rubrics", joinedActiveRubrics);
+      params.set("page", selectedPage);
     }
-    router.push(`?${params.toString()}`);
+
+    if (joinedActiveRubrics) {
+      params.set("rubrics", joinedActiveRubrics);
+    }
+
+    const queryString = params.toString();
+    const url = queryString ? `${pathname}?${queryString}` : pathname;
+
+    router.push(url);
   };
 
   return (

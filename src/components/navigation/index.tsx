@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const Navigation = () => {
   const boxStyles = {
-    columnGap: "64px",
+    gap: { xs: "12px", md: "40px", lg: "64px" },
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
@@ -62,7 +62,7 @@ export const Navigation = () => {
     margin: 0,
     padding: 0,
     display: "flex",
-    columnGap: "76px",
+    gap: { xs: "12px", md: "40px", lg: "76px" },
     justifyContent: "flex-end",
     alignItems: "center",
   };
@@ -77,36 +77,39 @@ export const Navigation = () => {
       color: "#38414D",
     },
   };
+  const hiddenOnXs = {
+    display: { xs: "none", sm: "flex" },
+  };
 
-  const hiddenStyles = {
+  const hiddenOnMd = {
     display: { xs: "none", lg: "flex" },
   };
 
   return (
     <Box sx={boxStyles}>
       <List sx={listStyles}>
-        <ListItem sx={itemStyles}>
-          <MuiLink href="/" component={Link} sx={menuLink}>
+        <ListItem sx={{ ...itemStyles, ...hiddenOnXs }}>
+          <MuiLink href="/articles" component={Link} sx={menuLink}>
             Учительская
           </MuiLink>
         </ListItem>
-        <ListItem sx={{ ...itemStyles, ...hiddenStyles }}>
-          <MuiLink href="/" component={Link} sx={menuLink}>
+        <ListItem sx={{ ...itemStyles, ...hiddenOnMd }}>
+          <MuiLink href="/articles" component={Link} sx={menuLink}>
             О сервисе
           </MuiLink>
         </ListItem>
-        <ListItem sx={{ ...itemStyles, ...hiddenStyles }}>
-          <MuiLink href="/" component={Link} sx={menuLink}>
+        <ListItem sx={{ ...itemStyles, ...hiddenOnMd }}>
+          <MuiLink href="/articles" component={Link} sx={menuLink}>
             Предметы
           </MuiLink>
         </ListItem>
-        <ListItem sx={itemStyles}>
-          <MuiLink href="/" component={Link} sx={menuLink}>
+        <ListItem sx={{ ...itemStyles, ...hiddenOnXs }}>
+          <MuiLink href="/articles" component={Link} sx={menuLink}>
             Ввести код
           </MuiLink>
         </ListItem>
       </List>
-      <MuiLink href="/" component={Link} sx={buttonLink}>
+      <MuiLink href="/articles" component={Link} sx={buttonLink}>
         Войти
       </MuiLink>
     </Box>

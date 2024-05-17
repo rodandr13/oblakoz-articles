@@ -15,7 +15,7 @@ export const ContentNavigation = () => {
     display: "flex",
     gap: "16px",
     margin: "0",
-    padding: "0",
+    padding: "8px 0",
     overflowX: "auto",
     overscrollBehavior: "auto",
     scrollSnapType: "x mandatory",

@@ -1,10 +1,11 @@
+"use client";
+
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Pagination as MuiPagination } from "@mui/material";
 import PaginationItem from "@mui/material/PaginationItem";
 import Stack from "@mui/material/Stack";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
 interface Props {
   totalPages: number;
@@ -12,9 +13,6 @@ interface Props {
 }
 
 export const Pagination = ({ totalPages, activePage }: Props) => {
-  const searchParams = useSearchParams();
-  const page = searchParams ? searchParams.get("page") || "1" : "1";
-
   return (
     <Stack
       spacing={2}
